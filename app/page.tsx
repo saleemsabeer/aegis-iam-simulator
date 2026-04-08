@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { Suspense, useCallback, useMemo } from "react";
+import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PolicyEditor } from "@/components/PolicyEditor";
 import { DriftDetector } from "@/components/DriftDetector";
@@ -76,14 +77,12 @@ function AegisApp() {
               </p>
             </div>
           </div>
-          <a
-            href="https://aegis-iam.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-muted-foreground hover:text-aegis-cyan transition-colors"
-          >
-            aegis-iam.vercel.app
-          </a>
+          <div className="flex items-center gap-4">
+            <Link href="/generate" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Generator</Link>
+            <Link href="/validate" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Validator</Link>
+            <Link href="/audit" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Audit</Link>
+            <Link href="/demo" className="text-xs text-muted-foreground hover:text-aegis-cyan transition-colors">Demo</Link>
+          </div>
         </div>
       </header>
 

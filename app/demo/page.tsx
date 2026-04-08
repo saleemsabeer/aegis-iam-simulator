@@ -307,8 +307,9 @@ export default function DemoPage() {
           </div>
           <div className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Features</a>
+            <a href="#solutions" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Solutions</a>
             <a href="#demo" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Demo</a>
-            <a href="#clouds" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Multi-Cloud</a>
+            <a href="#faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
           </div>
           <Link
             href="/"
@@ -705,6 +706,229 @@ export default function DemoPage() {
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ── Solutions Grid ── */}
+      <Section id="solutions" className="relative z-10 py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-16">
+            <p className="text-sm font-semibold text-aegis-cyan uppercase tracking-widest mb-3">Solutions</p>
+            <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
+              Built for every IAM workflow
+            </h2>
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+              From writing policies to auditing entire accounts, Aegis covers the full IAM security lifecycle.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                title: "AI Policy Generator",
+                desc: "Describe what you need in plain English. Claude generates production-ready IAM policies following least-privilege principles.",
+                href: "/generate",
+                iconBg: "bg-aegis-cyan/10 border-aegis-cyan/20",
+                iconColor: "text-aegis-cyan",
+                icon: (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                ),
+              },
+              {
+                title: "Security Validator",
+                desc: "Paste any policy and get a security score, compliance checks against PCI DSS, HIPAA, SOX, GDPR, and CIS, plus AI-powered remediation steps.",
+                href: "/validate",
+                iconBg: "bg-aegis-allow/10 border-aegis-allow/20",
+                iconColor: "text-aegis-allow",
+                icon: (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                ),
+              },
+              {
+                title: "Infrastructure Audit",
+                desc: "Autonomously scan AWS accounts for misconfigurations, overprivileged roles, stale credentials, and public resources.",
+                href: "/audit",
+                iconBg: "bg-aegis-warn/10 border-aegis-warn/20",
+                iconColor: "text-aegis-warn",
+                icon: (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                ),
+              },
+              {
+                title: "Policy Simulator",
+                desc: "Test access requests against IAM policies in real time. Client-side evaluation for instant results, AI explanation for deep understanding.",
+                href: "/",
+                iconBg: "bg-aegis-cyan/10 border-aegis-cyan/20",
+                iconColor: "text-aegis-cyan",
+                icon: (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 010 1.972l-11.54 6.347a1.125 1.125 0 01-1.667-.986V5.653z" />
+                ),
+              },
+              {
+                title: "Drift Detection",
+                desc: "Compare baseline and current policies to detect unauthorized changes. Severity scoring and AI risk commentary for every drift item.",
+                href: "/",
+                iconBg: "bg-aegis-deny/10 border-aegis-deny/20",
+                iconColor: "text-aegis-deny",
+                icon: (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                ),
+              },
+              {
+                title: "Least Privilege",
+                desc: "Analyze CloudTrail logs against your policies to identify unused permissions and get AI recommendations for right-sizing access.",
+                href: "/",
+                iconBg: "bg-[#a78bfa]/10 border-[#a78bfa]/20",
+                iconColor: "text-[#a78bfa]",
+                icon: (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                ),
+              },
+            ].map((solution) => (
+              <Link
+                key={solution.title}
+                href={solution.href}
+                className="group glass-card glow-border rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-aegis-cyan/30"
+              >
+                <div className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl ${solution.iconBg} border`}>
+                  <svg className={`h-5 w-5 ${solution.iconColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    {solution.icon}
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold mb-2 group-hover:text-aegis-cyan transition-colors">{solution.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{solution.desc}</p>
+                <div className="mt-4 flex items-center gap-1 text-xs font-medium text-aegis-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+                  Try it
+                  <svg className="h-3 w-3 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ── Why Use Aegis ── */}
+      <Section className="relative z-10 py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-16">
+            <p className="text-sm font-semibold text-aegis-cyan uppercase tracking-widest mb-3">Why Aegis</p>
+            <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
+              IAM security shouldn&apos;t be guesswork
+            </h2>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div className="space-y-6">
+              {[
+                {
+                  title: "Manual policy review doesn't scale",
+                  desc: "Cloud environments have hundreds of IAM policies, roles, and service accounts. Manual review misses critical misconfigurations and takes weeks instead of minutes.",
+                },
+                {
+                  title: "Compliance audits are painful",
+                  desc: "Mapping policies to PCI DSS, HIPAA, SOX, GDPR, and CIS benchmarks requires deep expertise. Aegis does it automatically with every validation.",
+                },
+                {
+                  title: "Permissions drift silently",
+                  desc: "An engineer adds a wildcard permission for a hotfix and forgets to revert it. Aegis catches drift before it becomes a breach.",
+                },
+                {
+                  title: "Least-privilege is aspirational",
+                  desc: "Most organizations know they should right-size permissions but lack tooling to compare granted vs. used access. Aegis makes it quantifiable.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-4">
+                  <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-aegis-cyan/10 border border-aegis-cyan/20">
+                    <span className="text-xs font-bold text-aegis-cyan">{i + 1}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold mb-1">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-center">
+              <div className="rounded-2xl border border-border bg-card/50 p-8 w-full max-w-sm">
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-6">Before vs. After Aegis</p>
+                <div className="space-y-4">
+                  {[
+                    { before: "Weeks to audit", after: "Minutes", metric: "Audit time" },
+                    { before: "Unknown", after: "Quantified", metric: "Permission usage" },
+                    { before: "Reactive", after: "Continuous", metric: "Drift detection" },
+                    { before: "Spreadsheets", after: "Automated", metric: "Compliance" },
+                    { before: "Copy-paste", after: "AI-generated", metric: "Policy writing" },
+                  ].map((row) => (
+                    <div key={row.metric} className="flex items-center gap-3">
+                      <span className="flex-1 text-xs text-muted-foreground">{row.metric}</span>
+                      <span className="rounded bg-aegis-deny/10 border border-aegis-deny/20 px-2 py-0.5 text-[10px] font-medium text-aegis-deny line-through decoration-aegis-deny/40">{row.before}</span>
+                      <svg className="h-3 w-3 text-muted-foreground/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                      <span className="rounded bg-aegis-allow/10 border border-aegis-allow/20 px-2 py-0.5 text-[10px] font-bold text-aegis-allow">{row.after}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ── FAQ ── */}
+      <Section id="faq" className="relative z-10 py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="text-center mb-16">
+            <p className="text-sm font-semibold text-aegis-cyan uppercase tracking-widest mb-3">FAQ</p>
+            <h2 className="text-3xl font-bold sm:text-4xl">Common questions</h2>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "Which cloud providers does Aegis support?",
+                a: "Aegis supports AWS IAM, Azure RBAC, and GCP IAM. Each provider has native evaluation logic that matches the real cloud semantics, not a generic translation layer.",
+              },
+              {
+                q: "How does the AI policy generation work?",
+                a: "Describe what you need in plain English and Claude generates a production-ready policy following least-privilege principles. The output includes the policy JSON and a plain-English explanation of what it does, security considerations, and hardening suggestions.",
+              },
+              {
+                q: "Is the policy evaluation done locally or on a server?",
+                a: "Policy simulation runs entirely client-side in your browser for instant results. The AI-powered explanation streams from the server asynchronously after the verdict is already displayed.",
+              },
+              {
+                q: "What compliance frameworks does the validator check?",
+                a: "The security validator checks policies against PCI DSS, HIPAA, SOX, GDPR, and CIS benchmarks. Each framework gets a pass, partial, or fail rating based on the severity of findings.",
+              },
+              {
+                q: "Does the audit feature connect to my real AWS account?",
+                a: "The audit feature supports connecting to real AWS accounts via access keys or IAM roles. You can also run a demo audit with sample data to see the full experience without providing credentials.",
+              },
+              {
+                q: "How is the security score calculated?",
+                a: "The score starts at 100 and deducts points based on finding severity: 25 for critical, 12 for high, 5 for medium, and 2 for low. This gives a quick, actionable metric for overall policy health.",
+              },
+            ].map((item, i) => (
+              <details
+                key={i}
+                className="group rounded-xl border border-border bg-card overflow-hidden"
+              >
+                <summary className="flex cursor-pointer items-center justify-between p-4 text-sm font-medium hover:bg-secondary/20 transition-colors list-none">
+                  {item.q}
+                  <svg className="h-4 w-4 text-muted-foreground shrink-0 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div className="border-t border-border px-4 pb-4 pt-3">
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.a}</p>
+                </div>
+              </details>
             ))}
           </div>
         </div>
