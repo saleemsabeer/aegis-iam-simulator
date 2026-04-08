@@ -1,65 +1,148 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense, useCallback, useMemo } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PolicyEditor } from "@/components/PolicyEditor";
+import { DriftDetector } from "@/components/DriftDetector";
+import { LeastPrivilegeAnalyzer } from "@/components/LeastPrivilegeAnalyzer";
+import type { CloudProvider } from "@/lib/types";
+
+const VALID_CLOUDS = new Set<string>(["aws", "azure", "gcp"]);
+const VALID_TABS = new Set<string>(["simulator", "drift", "least-privilege"]);
+
+function AegisApp() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const cloud = useMemo(() => {
+    const c = searchParams.get("cloud") ?? "aws";
+    return VALID_CLOUDS.has(c) ? (c as CloudProvider) : "aws";
+  }, [searchParams]);
+
+  const tab = useMemo(() => {
+    const t = searchParams.get("tab") ?? "simulator";
+    return VALID_TABS.has(t) ? t : "simulator";
+  }, [searchParams]);
+
+  const updateParams = useCallback(
+    (updates: Record<string, string>) => {
+      const params = new URLSearchParams(searchParams.toString());
+      for (const [key, value] of Object.entries(updates)) {
+        params.set(key, value);
+      }
+      router.replace(`?${params.toString()}`, { scroll: false });
+    },
+    [searchParams, router]
+  );
+
+  const setCloud = useCallback(
+    (c: CloudProvider) => updateParams({ cloud: c }),
+    [updateParams]
+  );
+
+  const setTab = useCallback(
+    (t: string) => updateParams({ tab: t }),
+    [updateParams]
+  );
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex min-h-screen flex-col">
+      {/* Header */}
+      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-aegis-cyan/10 border border-aegis-cyan/20">
+              <svg
+                className="h-5 w-5 text-aegis-cyan"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+                />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold tracking-tight">
+                Aegis
+              </h1>
+              <p className="text-xs text-muted-foreground">
+                IAM Simulator & Drift Detector
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://aegis-iam.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-muted-foreground hover:text-aegis-cyan transition-colors"
+          >
+            aegis-iam.vercel.app
+          </a>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      {/* Main */}
+      <main className="flex-1">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+          <Tabs value={tab} onValueChange={setTab}>
+            <TabsList className="mb-6 bg-secondary/50">
+              <TabsTrigger value="simulator" className="data-[state=active]:bg-aegis-cyan data-[state=active]:text-primary-foreground">
+                Policy Simulator
+              </TabsTrigger>
+              <TabsTrigger value="drift" className="data-[state=active]:bg-aegis-cyan data-[state=active]:text-primary-foreground">
+                Drift Detector
+              </TabsTrigger>
+              <TabsTrigger value="least-privilege" className="data-[state=active]:bg-aegis-cyan data-[state=active]:text-primary-foreground">
+                Least Privilege
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="simulator">
+              <PolicyEditor cloud={cloud} onCloudChange={setCloud} />
+            </TabsContent>
+
+            <TabsContent value="drift">
+              <DriftDetector cloud={cloud} onCloudChange={setCloud} />
+            </TabsContent>
+
+            <TabsContent value="least-privilege">
+              <LeastPrivilegeAnalyzer
+                cloud={cloud}
+                onCloudChange={setCloud}
+              />
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-border py-4">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <p className="text-center text-xs text-muted-foreground">
+            Aegis IAM Simulator. Built with Next.js, Tailwind CSS, and Claude.
+          </p>
+        </div>
+      </footer>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-aegis-cyan border-t-transparent" />
+        </div>
+      }
+    >
+      <AegisApp />
+    </Suspense>
   );
 }
