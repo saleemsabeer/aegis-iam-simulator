@@ -331,19 +331,19 @@ export default function DemoPage() {
             </div>
 
             <h1 className="max-w-4xl text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              <span className="block text-foreground">Simulate. Detect.</span>
+              <span className="block text-foreground">Prioritize and Remediate</span>
               <span
                 className="block bg-gradient-to-r from-aegis-cyan via-[#67e8f9] to-[#a78bfa] bg-clip-text text-transparent animate-gradient-shift"
                 style={{ backgroundSize: "200% 200%" }}
               >
-                Secure.
+                IAM Risks Faster.
               </span>
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed sm:text-xl">
-              Multi-cloud IAM policy simulator with real-time drift detection,
-              least-privilege analysis, and AI-powered security explanations.
-              One tool for AWS, Azure, and GCP.
+              Generate secure policies, validate compliance, and autonomously
+              audit your entire infrastructure. The Aegis IAM Security
+              Platform is powered by agentic AI.
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
